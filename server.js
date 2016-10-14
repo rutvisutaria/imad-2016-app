@@ -21,12 +21,45 @@ var art1 ={
     
 };
 
+function createTemplate (data) {
+    var title= data.title;
+    var heading=data.heading;
+    varcontent= data.content;
+    
+    var htmlTemplate= `
+    
+    <html>
+    <head>
+        <title>${title}</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link href="/ui/style.css" rel="stylesheet" />
+        
+    </head>
+    <body>
+        <div class="container">
+            <div>
+                <a href="/">Home</a>
+                <hr/>
+                <h3>
+                    ${heading};
+                </h3>
+                ${content};
+            </div>
+        </div>
+    </body>
+    </html>
+
+    `;
+    return htmlTemplate;
+    
+}
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
 app.get('/article1', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'article1.html'));
+  res.send(createTemplate(article1));
 });
 
 app.get('/article2', function (req, res) {
